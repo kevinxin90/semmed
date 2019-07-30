@@ -5,7 +5,7 @@ import os
 
 def load_data(data_folder):
     nodes_path = os.path.join(data_folder, "nodes_neo4j.csv")
-    edges_path = os.path.join(data_folder, "edges_neo4j.csv")
+    edges_path = os.path.join(data_folder, "edges_new_neo4j.csv")
     group_by_semmantic_dict = defaultdict(list)
     id_type_mapping = {}
     with open(nodes_path) as f:
