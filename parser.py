@@ -13,7 +13,7 @@ def load_data(data_folder):
         next(csv_reader)
         for _item in csv_reader:
             group_by_semmantic_dict[_item[-2]].append(_item[-1])
-            id_type_mapping[_item[-1]] = _item[-2]
+            id_type_mapping[_item[-1]] = {'type': _item[-2], 'name': _item[1]}
     disease_related = {}
     with open(edges_path) as f:
         csv_reader = csv.reader(f, delimiter=',')
@@ -25,7 +25,7 @@ def load_data(data_folder):
                                                  'umls': _item[4][5:],
                                                  'name': id_type_mapping[_item[4]]['name']}
                 pred = _item[0]
-                semantic_type = id_type_mapping[_item[5]]
+                semantic_type = id_type_mapping[_item[5]]['type']
                 if pred not in disease_related[_item[4]]:
                     disease_related[_item[4]][pred] = {}
                 if semantic_type not in disease_related[_item[4]][pred]:
@@ -38,7 +38,7 @@ def load_data(data_folder):
                                                  'umls': _item[5][5:],
                                                  'name': id_type_mapping[_item[5]]['name']}
                 pred = _item[0] + '_reverse'
-                semantic_type = id_type_mapping[_item[4]]
+                semantic_type = id_type_mapping[_item[4]]['type']
                 if pred not in disease_related[_item[5]]:
                     disease_related[_item[5]][pred] = {}
                 if semantic_type not in disease_related[_item[5]][pred]:
