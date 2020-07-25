@@ -170,8 +170,9 @@ def load_data(data_folder):
     for v in gene_related.values():
         for m, n in v.items():
             if m not in ["_id", "umls", "name", "@type"]:
-                v[m] = []
+                tmp = []
                 for item in n.values():
                     item['pmid'] = list(item['pmid'])
-                    v[m].append(item)
+                    tmp.append(item)
+                v[m] = tmp
         yield v
